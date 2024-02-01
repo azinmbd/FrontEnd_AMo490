@@ -89,7 +89,6 @@ Detailed tasks descriptions for each phase of the project.
 1. Nardocci, M., Polsky, J. Y., & Moubarac, J. C. (2021). [Consumption of ultraprocessed foods is associated with obesity, diabetes and hypertension in Canadian adults](https://link.springer.com/article/10.17269/s41997020004299). Canadian Journal of Public Health, 112, 421–429.
 2. Mandake, R. (2023, November 23). [Online Food Ordering Market Share Growth, Trends 2023-2030](https://www.linkedin.com/pulse/onlinefoodorderingmarketsharegrowthtrendsrajmandakeiptvf/?trk=articlessrfrontendpulse_morearticles_relatedcontentcard). IMR Market Reports.
 3. Love Food Hate Waste Canada. (2022). [Food Waste Action Week](https://lovefoodhatewaste.ca/fwaw/#:~:text=Get%20Involved%20in%20Food%20Waste,edible%20food%20we%20throw%20out.).
-4. Monday.com. (n.d.). [Kanban Gantt Chart](https://monday.com/).
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
