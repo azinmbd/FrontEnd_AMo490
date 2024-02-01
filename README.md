@@ -2,7 +2,7 @@
 ## CSIS4490---GroupProject
 
 
-![image](https://github.com/bengisugelin/BaseBeautyProject/assets/logo.svg)
+![image](https://github.com/azinmbd/FrontEnd_AMo490/blob/main/src/assets/logo.svg)
 ## Contents
 - [1. Introduction](#1-introduction)
 - [2. Proposed Research Project](#2-proposed-research-project)
