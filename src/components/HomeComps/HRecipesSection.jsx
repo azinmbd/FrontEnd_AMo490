@@ -7,12 +7,9 @@ import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-
-import CheckIcon from "@mui/icons-material/Check";
 import recipe1 from "../../assets/Recipe1.jpg";
 import recipe2 from "../../assets/Recipe2.jpg";
 import recipe3 from "../../assets/Recipe3.jpg";
-import { Link } from "react-router-dom";
 
 const HrecipesSection = () => {
   const authStatus = useSelector((state) => state.auth.status);

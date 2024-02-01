@@ -2,10 +2,9 @@ import React, { useEffect } from "react";
 import Container from "@mui/material/Container";
 import Footer from "../components/Footer";
 import HFirstSection from "../components/HomeComps/HFirstSection";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import HAboutSection from "../components/HomeComps/HAboutSection";
 import HLatestRecipesSection from "../components/HomeComps/HLatestRecipesSection";
-import HCarosel from "../components/HomeComps/HCarosel";
 import HRecipesSection from "../components/HomeComps/HRecipesSection";
 
 const Home = () => {

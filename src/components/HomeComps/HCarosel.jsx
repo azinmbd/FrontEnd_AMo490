@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Carousel from "react-multi-carousel";

@@ -10,7 +10,6 @@ import Container from "@mui/material/Container";
 import firstpic from "../../assets/firstpic.png";
 import { useNavigate } from "react-router-dom";
 export default function HFirstSection() {
-  let navigate = useNavigate();
 
   const handleRecipes = (e) => {
     e.preventDefault();
