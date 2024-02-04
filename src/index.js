@@ -19,9 +19,7 @@ const options = {
   mode: 'payment',
   amount: 1099,
   currency: 'usd',
-  // Fully customizable with appearance API.
   appearance: {
-    /*...*/
   },
 };
 const stripePromise = loadStripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
@@ -60,14 +58,13 @@ const theme = createTheme({
         },
       },
     },
-    MuiOutlinedInput: { // Example: for OutlinedInput
+    MuiOutlinedInput: { 
       styleOverrides: {
         root: {
           borderRadius: 150,
         },
       },
     },
-    // Add similar overrides for other input components like MuiTextField, MuiSelect, etc.
   },
 });
 

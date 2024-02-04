@@ -4,7 +4,6 @@ import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.svg";
-import wlogo from "../assets/wlogo.svg";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useDispatch, useSelector } from "react-redux";
@@ -122,7 +121,7 @@ const AuthHeader = () => {
             &times;
           </a>
           <div className="d-flex justify-c">
-            <img src={wlogo} width="150px" alt="" />
+            <img src={logo} width="150px" alt="" />
           </div>
           <NavLink
             className="nav-item"

@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Grid, Typography } from "@mui/material";
-import logo from "../assets/wlogo.svg";
+import logo from "../assets/logo.svg";
 import Instagram from "../components/svg/instagram";
 import Linkdin from "../components/svg/linkdin";
 import Container from "@mui/material/Container";
@@ -43,7 +43,7 @@ export const Footer = () => {
               data-aos-duration="2000"
               data-aos-delay="0"
             >
-              <img src={logo} alt="" width={"100px"} sx={{ mb: 3 }} />
+              <img src={logo} alt="" width={"250px"} sx={{ mb: 3 }} />
               <Typography
                 color="black"
                 variant="h5"
@@ -81,8 +81,7 @@ export const Footer = () => {
             display={"flex"}
             boxShadow={"none"}
           >
-            <div className="svgHolder">
-            </div>
+            <div className="svgHolder"></div>
           </Grid>
         </Grid>
       </Container>

@@ -9,6 +9,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import firstpic from "../../assets/firstpic.png";
 import { useNavigate } from "react-router-dom";
+
+
 export default function HFirstSection() {
 
   const handleRecipes = (e) => {
