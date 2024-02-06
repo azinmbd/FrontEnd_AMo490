@@ -25,21 +25,21 @@ const SignIn = () => {
   const [notification, setNotification] = useState(null); // Store the notification state
 
   useEffect(() => {
-    if (status === 'Successful') {
+    if (status === "Successful") {
       setNotification(
         <Alert severity="success" sx={{ mt: 4 }}>
           Your login was successful!
         </Alert>
       );
       setTimeout(() => {
-        navigate('/');
+        navigate("/");
       }, 1000); // Navigate after 1 second
     } else if (status === 401 || status === 404) {
       setNotification(
         <Alert severity="error" sx={{ mt: 4 }}>
           {status === 401
-            ? 'Email or password are wrong. Try Again!'
-            : 'User not found. Please sign up.'}
+            ? "Email or password are wrong. Try Again!"
+            : "User not found. Please sign up."}
         </Alert>
       );
       setTimeout(() => {
@@ -50,11 +50,11 @@ const SignIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login({ customerEmail, customerPassword }));
+    dispatch(login({ userEmail, userPassword }));
   };
 
-  const [customerEmail, setEmail] = useState('');
-  const [customerPassword, setPassword] = useState('');
+  const [userEmail, setEmail] = useState("");
+  const [userPassword, setPassword] = useState("");
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
@@ -100,24 +100,24 @@ const SignIn = () => {
                 margin="normal"
                 required
                 fullWidth
-                id="customerEmail"
+                id="userEmail"
                 label="Email Address"
-                name="customerEmail"
+                name="userEmail"
                 autoComplete="email"
                 autoFocus
-                value={customerEmail}
+                value={userEmail}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                name="customerPassword"
+                name="userPassword"
                 label="Password"
                 type="password"
-                id="customerPassword"
+                id="userPassword"
                 autoComplete="current-password"
-                value={customerPassword}
+                value={userPassword}
                 onChange={(e) => setPassword(e.target.value)}
               />
 

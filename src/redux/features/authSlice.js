@@ -24,12 +24,12 @@ const authSlice = createSlice({
 export const { loginSuccess, logout } = authSlice.actions;
 
 export const login =
-  ({ customerEmail, customerPassword }) =>
+  ({ userEmail, userPassword }) =>
   async (dispatch) => {
     try {
       const queryParams = new URLSearchParams({
-        customerEmail,
-        customerPassword,
+        userEmail,
+        userPassword,
       });
       const response = await axios.post(
         `http://127.0.0.1:3000/user/login?${queryParams.toString()}`,

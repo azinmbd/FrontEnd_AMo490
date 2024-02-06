@@ -22,11 +22,11 @@ const SignUp = () => {
   let navigate = useNavigate();
   const [signupState, setSignupState] = React.useState(null);
   const [formData, setFormData] = useState({
-    customerFirstName: "", // Initialize customerFirstName
-    customerLastName: "", // Initialize customerLastName
-    customerEmail: "", // Initialize customerEmail
-    customerPhoneNumber: "", // Initialize customerPhoneNumber
-    customerPassword: "", // Initialize customerPassword
+    userFirstName: "", // Initialize userFirstName
+    userLastName: "", // Initialize userLastName
+    userEmail: "", // Initialize userEmail
+    userPhoneNumber: "", // Initialize userPhoneNumber
+    userPassword: "", // Initialize userPassword
   });
   const handleSignIn = (e) => {
     e.preventDefault();
@@ -34,7 +34,7 @@ const SignUp = () => {
   };
 
   const handleNotification = () => {
-    if (signupState === true && formData.customerPassword !== "") {
+    if (signupState === true && formData.userPassword !== "") {
       return (
         <Alert severity="success" sx={{ mt: 4 }}>
           Your Account Was created! You can LogIn now!!
@@ -59,11 +59,11 @@ const SignUp = () => {
 
     // Check if any form fields are empty
     if (
-      !formData.customerFirstName ||
-      !formData.customerLastName ||
-      !formData.customerEmail ||
-      !formData.customerPhoneNumber ||
-      !formData.customerPassword
+      !formData.userFirstName ||
+      !formData.userLastName ||
+      !formData.userEmail ||
+      !formData.userPhoneNumber ||
+      !formData.userPassword
     ) {
       setSignupState(false); // Set signupState to false to show error
       return;
@@ -80,7 +80,7 @@ const SignUp = () => {
     try {
       // Make the POST request with Axios
       const response = await axios.post(
-        `http://localhost:8080/api/customers/register?${queryString}`,
+        `http://127.0.0.1:3000/user/register?${queryString}`,
         {},
         {
           headers: {
@@ -167,10 +167,10 @@ const SignUp = () => {
                   <TextField
                     required
                     fullWidth
-                    id="customerFirstName"
+                    id="userFirstName"
                     label="First Name"
-                    name="customerFirstName"
-                    value={formData.customerFirstName}
+                    name="userFirstName"
+                    value={formData.userFirstName}
                     onChange={handleChange}
                     placeholder="First Name"
                     autoComplete="given-name"
@@ -182,11 +182,11 @@ const SignUp = () => {
                   <TextField
                     required
                     fullWidth
-                    id="customerLastName"
+                    id="userLastName"
                     label="Last Name"
-                    name="customerLastName"
+                    name="userLastName"
                     type="text"
-                    value={formData.customerLastName}
+                    value={formData.userLastName}
                     onChange={handleChange}
                     placeholder="Last Name"
                     autoComplete="family-name"
@@ -196,11 +196,11 @@ const SignUp = () => {
                   <TextField
                     required
                     fullWidth
-                    id="customerEmail"
+                    id="userEmail"
                     label="Email Address"
-                    name="customerEmail"
+                    name="userEmail"
                     type="text"
-                    value={formData.customerEmail}
+                    value={formData.userEmail}
                     onChange={handleChange}
                     placeholder="Email"
                     autoComplete="email"
@@ -210,11 +210,11 @@ const SignUp = () => {
                   <TextField
                     required
                     fullWidth
-                    name="customerPhoneNumber"
+                    name="userPhoneNumber"
                     label="Phone Number"
                     type="text"
-                    id="customerPhoneNumber"
-                    value={formData.customerPhoneNumber}
+                    id="userPhoneNumber"
+                    value={formData.userPhoneNumber}
                     onChange={handleChange}
                     placeholder="Phone Number"
                     autoComplete="phonenumber"
@@ -224,11 +224,11 @@ const SignUp = () => {
                   <TextField
                     required
                     fullWidth
-                    name="customerPassword"
+                    name="userPassword"
                     label="Password"
                     type="password"
-                    id="customerPassword"
-                    value={formData.customerPassword}
+                    id="userPassword"
+                    value={formData.userPassword}
                     onChange={handleChange}
                     placeholder="Password"
                     autoComplete="new-password"
