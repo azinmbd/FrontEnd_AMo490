@@ -7,14 +7,18 @@ import logo from "../assets/logo.svg";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteToken } from "../redux/features/authSlice";
+import { logout } from "../redux/features/logoutSlice";
 import { useNavigate } from "react-router-dom";
 const AuthHeader = () => {
+  const token = useSelector((state) => state.auth.token);
+  const userId = useSelector(state => state.auth.userId);
+  useEffect(() => {
+
+
+  }, [userId, token]); 
   const dispatch = useDispatch();
-  let navigate = useNavigate();
   const handleClick = () => {
-    dispatch(deleteToken());
-    navigate("/");
+    dispatch(logout({token, userId}));
   };
 
   const openNav = () => {
@@ -101,13 +105,17 @@ const AuthHeader = () => {
               <div className="headerCartIcon">
                 <PersonOutlineOutlinedIcon
                   className="cartIcon"
-                  sx={{ color: "secondary.main", fontSize: "2.2em" }}
+                  sx={{
+                    color: "secondary.main",
+                    fontSize: "2.2em",
+                    width: "150px",
+                  }}
                 />
               </div>
             </NavLink>
             <NavLink
               className="nav-item siginBtn signout"
-              style={{ backgroundColor: "#F8F5E4" }}
+              style={{ backgroundColor: "#F8F5E4", width: "150px" }}
               onClick={handleClick}
             >
               Sign Out

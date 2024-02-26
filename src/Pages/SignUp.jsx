@@ -12,6 +12,13 @@ import Typography from "@mui/material/Typography";
 import signUpBg from "../assets/sigup.jpg";
 import { useNavigate } from "react-router-dom";
 import MuiAlert from "@mui/material/Alert";
+import { useDispatch } from "react-redux";
+import {
+  registerUser,
+  registerStart,
+  registerSuccess,
+  registerFailure,
+} from "../redux/features/userRegisterSlice";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -20,85 +27,60 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 const SignUp = () => {
   const formRef = React.useRef();
   let navigate = useNavigate();
-  const [signupState, setSignupState] = React.useState(null);
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    userFirstName: "", // Initialize userFirstName
-    userLastName: "", // Initialize userLastName
-    userEmail: "", // Initialize userEmail
-    userPhoneNumber: "", // Initialize userPhoneNumber
-    userPassword: "", // Initialize userPassword
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
   });
-  const handleSignIn = (e) => {
-    e.preventDefault();
-    navigate("/signin");
-  };
-
-  const handleNotification = () => {
-    if (signupState === true && formData.userPassword !== "") {
-      return (
-        <Alert severity="success" sx={{ mt: 4 }}>
-          Your Account Was created! You can LogIn now!!
-        </Alert>
-      );
-    } else if (signupState === false) {
-      return (
-        <Alert severity="error" sx={{ mt: 4 }}>
-          There was an error in creating your account. Please try again.
-        </Alert>
-      );
-    }
-    return null;
-  };
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if any form fields are empty
     if (
-      !formData.userFirstName ||
-      !formData.userLastName ||
-      !formData.userEmail ||
-      !formData.userPhoneNumber ||
-      !formData.userPassword
+      !formData.first_name ||
+      !formData.last_name ||
+      !formData.email ||
+      !formData.password
     ) {
-      setSignupState(false); // Set signupState to false to show error
+      setShowAlert(true);
       return;
     }
 
-    // All form fields are filled, proceed with the POST request
-    const queryString = Object.keys(formData)
-      .map(
-        (key) =>
-          `${encodeURIComponent(key)}=${encodeURIComponent(formData[key])}`
-      )
-      .join("&");
-
     try {
-      // Make the POST request with Axios
       const response = await axios.post(
-        `http://127.0.0.1:3000/user/register?${queryString}`,
-        {},
+        "http://127.0.0.1:3000/user/register",
+        formData,
         {
           headers: {
             "Content-Type": "application/json",
           },
         }
       );
+
+      console.log(response);
       if (response.status === 200 || response.status === 201) {
-        setSignupState(true);
+        dispatch(registerUser(formData));
         setTimeout(() => navigate("/signin"), 600);
       } else {
-        setSignupState(false);
+        setShowAlert(true);
+        console.log("Registration failed");
       }
     } catch (error) {
-      setSignupState(false);
+      setShowAlert(true);
       console.error("Error:", error);
     }
-  }
+  };
+
+  const handleSignIn = (e) => {
+    navigate("/signin");
+  };
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
@@ -158,7 +140,7 @@ const SignUp = () => {
             <Box
               component="form"
               noValidate
-              onSubmit={handleSubmit}
+              onSubmit={(e) => handleSubmit(e)}
               ref={formRef}
               sx={{ mt: 3 }}
             >
@@ -167,10 +149,10 @@ const SignUp = () => {
                   <TextField
                     required
                     fullWidth
-                    id="userFirstName"
+                    id="first_name"
                     label="First Name"
-                    name="userFirstName"
-                    value={formData.userFirstName}
+                    name="first_name"
+                    value={formData.first_name}
                     onChange={handleChange}
                     placeholder="First Name"
                     autoComplete="given-name"
@@ -182,11 +164,11 @@ const SignUp = () => {
                   <TextField
                     required
                     fullWidth
-                    id="userLastName"
+                    id="last_name"
                     label="Last Name"
-                    name="userLastName"
+                    name="last_name"
                     type="text"
-                    value={formData.userLastName}
+                    value={formData.last_name}
                     onChange={handleChange}
                     placeholder="Last Name"
                     autoComplete="family-name"
@@ -196,11 +178,11 @@ const SignUp = () => {
                   <TextField
                     required
                     fullWidth
-                    id="userEmail"
+                    id="email"
                     label="Email Address"
-                    name="userEmail"
+                    name="email"
                     type="text"
-                    value={formData.userEmail}
+                    value={formData.email}
                     onChange={handleChange}
                     placeholder="Email"
                     autoComplete="email"
@@ -210,25 +192,11 @@ const SignUp = () => {
                   <TextField
                     required
                     fullWidth
-                    name="userPhoneNumber"
-                    label="Phone Number"
-                    type="text"
-                    id="userPhoneNumber"
-                    value={formData.userPhoneNumber}
-                    onChange={handleChange}
-                    placeholder="Phone Number"
-                    autoComplete="phonenumber"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    name="userPassword"
+                    name="password"
                     label="Password"
                     type="password"
-                    id="userPassword"
-                    value={formData.userPassword}
+                    id="password"
+                    value={formData.password}
                     onChange={handleChange}
                     placeholder="Password"
                     autoComplete="new-password"
@@ -240,9 +208,9 @@ const SignUp = () => {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2, bgcolor: "secondary.main" }}
-                onClick={() => {
-                  handleNotification();
+                onClick={(e) => {
                   formRef.current.reportValidity();
+                  handleSubmit(e);
                 }}
               >
                 Sign Up
@@ -254,8 +222,12 @@ const SignUp = () => {
                   </Link>
                 </Grid>
               </Grid>
-              {handleNotification(null)}
             </Box>
+            {showAlert && (
+              <Alert severity="error" sx={{ mt: 4 }}>
+                There was an error in creating your account. Please try again.
+              </Alert>
+            )}
           </Box>
         </Box>
       </Grid>

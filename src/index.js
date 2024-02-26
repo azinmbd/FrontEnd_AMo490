@@ -6,8 +6,6 @@ import store from "./app/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import { BrowserRouter } from "react-router-dom";
-import {Elements} from '@stripe/react-stripe-js';
-import {loadStripe} from '@stripe/stripe-js';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "react-multi-carousel/lib/styles.css";
@@ -15,14 +13,7 @@ import "aos/dist/aos.css";
 import "./styles/app.scss";
 
 let persistor = persistStore(store);
-const options = {
-  mode: 'payment',
-  amount: 1099,
-  currency: 'usd',
-  appearance: {
-  },
-};
-const stripePromise = loadStripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
+
 const theme = createTheme({
   palette: {
     secondary: {
@@ -68,18 +59,14 @@ const theme = createTheme({
   },
 });
 
-
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <BrowserRouter>
-      <Elements stripe={stripePromise} options={options}>
         <ThemeProvider theme={theme}>
           <App />
         </ThemeProvider>
-        </Elements>
       </BrowserRouter>
     </PersistGate>
   </Provider>

@@ -12,12 +12,15 @@ import { useNavigate } from "react-router-dom";
 
 
 export default function HFirstSection() {
+  let navigate = useNavigate();
 
   const handleRecipes = (e) => {
     e.preventDefault();
+    navigate("/recipes");
   };  
   const handleAskAi = (e) => {
     e.preventDefault();
+    navigate("/askai");
   };
   return (
     <Container maxWidth="xl">

@@ -13,7 +13,7 @@ class Linkdin extends Component {
           viewBox="0 0 512 512"
           // style="enable-background:new 0 0 512 512;"
           space="preserve"
-          fill="#F8F5E4"
+          fill={this.props.color}
         >
           <path
             className="st0"

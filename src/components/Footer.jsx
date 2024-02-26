@@ -66,7 +66,7 @@ export const Footer = () => {
               </Typography>
               <div className="d-flex">
                 <Instagram sx={{ mt: 3 }} />
-                <Linkdin sx={{ mt: 3 }} />
+                <Linkdin color="#F8F5E4" sx={{ mt: 3 }} />
               </div>
             </Box>
           </Grid>

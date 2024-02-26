@@ -4,6 +4,8 @@ import axios from "axios";
 const initialState = {
   status: null,
   user: null,
+  token: null,
+  userId: null,
 };
 
 const authSlice = createSlice({
@@ -11,45 +13,58 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     loginSuccess(state, action) {
-      state.status = action.payload.Status; // Use the status from the payload
-      state.user = action.payload.Userinfo;
+      state.status = "Successful";
+      state.user = action.payload.data.users;
+      state.token = action.payload.data.refreshToken;
+      state.userId = action.payload.data.users._id;
     },
-    logout(state, action) {
+    loginFailure(state) {
+      state.status = "failed";
+      state.user = null;
+      state.token = null;
+      state.userId = null;
+    },
+    resetAuthStatus(state) {
+      state.status = null;
+    },
+    logout(state) {
       state.status = null;
       state.user = null;
+      state.token = null;
+      state.userId = null;
     },
   },
 });
 
-export const { loginSuccess, logout } = authSlice.actions;
+export const { loginSuccess, loginFailure, logout , resetAuthStatus} = authSlice.actions;
 
 export const login =
-  ({ userEmail, userPassword }) =>
+  ({ email, password }) =>
   async (dispatch) => {
+    console.log(email, password);
     try {
-      const queryParams = new URLSearchParams({
-        userEmail,
-        userPassword,
-      });
       const response = await axios.post(
-        `http://127.0.0.1:3000/user/login?${queryParams.toString()}`,
-        null,
+        "http://127.0.0.1:3000/user/login",
+        {
+          email,
+          password,
+        },
         {
           headers: {
             "Content-Type": "application/json",
           },
         }
       );
-      const { Status, Userinfo } = response.data;
-      dispatch(loginSuccess({ Status, Userinfo }));
+      console.log(response);
+      if (response.data.statusCode === 200 && response.data.success) {
+        dispatch(loginSuccess(response.data));
+      } else {
+        dispatch(loginFailure());
+      }
     } catch (error) {
-      dispatch(loginSuccess({ Status: 401, Userinfo: {} }));
-      console.log(error.response);
+      dispatch(loginFailure());
+      console.error("Error:", error);
     }
   };
-
-export const deleteToken = () => (dispatch) => {
-  dispatch(logout(null));
-};
 
 export default authSlice.reducer;

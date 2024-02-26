@@ -41,23 +41,14 @@ const HrecipesSection = () => {
             data-aos-duration="2000"
             data-aos-delay={1200}
           >
-            <Card
-              sx={{
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                margin: "10px",
-              }}
-              className="recipeCard"
-            >
+            <Card className="recipeCard">
               <CardMedia
                 component="img"
-                sx={{ width: "70% !important" }}
                 image={recipe2}
                 alt="random"
                 className="cardMedia"
               />
-              <CardContent sx={{ flexGrow: 1 }}>
+              <CardContent sx={{ flexGrow: 1 }} className="cardContent">
                 <Typography gutterBottom variant="h5" component="h2">
                   Pasta Alfredo
                 </Typography>
@@ -70,16 +61,15 @@ const HrecipesSection = () => {
                   medium-high heat. Into the pan, add the milk, chicken broth,
                   butter, and garlic. Bring these ingredients to a simmer and
                   then add the pasta
-                </Typography>
+                </Typography>{" "}
+                <Button
+                  size="medium"
+                  sx={{ bgcolor: "custom.orange", color: "black" }}
+                  className="addtocartbtn"
+                >
+                  view recipe
+                </Button>
               </CardContent>
-
-              <Button
-                size="medium"
-                sx={{ bgcolor: "custom.orange", color: "black" }}
-                className="addtocartbtn"
-              >
-                view recipe
-              </Button>
             </Card>
           </Grid>
           <Grid
@@ -91,23 +81,14 @@ const HrecipesSection = () => {
             data-aos-duration="2000"
             data-aos-delay={1350}
           >
-            <Card
-              sx={{
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                margin: "10px",
-              }}
-              className="recipeCard"
-            >
+            <Card className="recipeCard">
               <CardMedia
                 component="img"
-                sx={{ width: "70% !important" }}
                 image={recipe3}
                 alt="random"
                 className="cardMedia"
               />
-              <CardContent sx={{ flexGrow: 1 }}>
+              <CardContent sx={{ flexGrow: 1 }} className="cardContent">
                 <Typography gutterBottom variant="h5" component="h2">
                   Pasta Alfredo
                 </Typography>
@@ -120,16 +101,15 @@ const HrecipesSection = () => {
                   medium-high heat. Into the pan, add the milk, chicken broth,
                   butter, and garlic. Bring these ingredients to a simmer and
                   then add the pasta
-                </Typography>
+                </Typography>{" "}
+                <Button
+                  size="medium"
+                  sx={{ bgcolor: "custom.orange", color: "black" }}
+                  className="addtocartbtn"
+                >
+                  view recipe
+                </Button>
               </CardContent>
-
-              <Button
-                size="medium"
-                sx={{ bgcolor: "custom.orange", color: "black" }}
-                className="addtocartbtn"
-              >
-                view recipe
-              </Button>
             </Card>
           </Grid>
           <Grid
@@ -141,26 +121,20 @@ const HrecipesSection = () => {
             data-aos-duration="2000"
             data-aos-delay={1450}
           >
-            <Card
-              sx={{
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                margin: "10px",
-              }}
-              className="recipeCard"
-            >
+            <Card className="recipeCard">
               <CardMedia
                 component="img"
-                sx={{ width: "70% !important" }}
                 image={recipe1}
                 alt="random"
                 className="cardMedia"
               />
-              <CardContent sx={{ flexGrow: 1 }}>
+              <CardContent sx={{ flexGrow: 1 }} className="cardContent">
                 <Typography gutterBottom variant="h5" component="h2">
                   Pasta Alfredo
-                </Typography>
+                </Typography>{" "}
+                <Typography gutterBottom variant="span" component="span">
+                  1hrs
+                </Typography>{" "}
                 <Typography>
                   Grab a skillet that is large enough to fit the 8 ounces of
                   fettuccine pasta. Place the skillet on the stove over
@@ -168,18 +142,14 @@ const HrecipesSection = () => {
                   butter, and garlic. Bring these ingredients to a simmer and
                   then add the pasta
                 </Typography>
-                <Typography gutterBottom variant="span" component="span">
-                  1hrs
-                </Typography>
+                <Button
+                  size="medium"
+                  sx={{ bgcolor: "custom.orange", color: "black" }}
+                  className="addtocartbtn"
+                >
+                  view recipe
+                </Button>
               </CardContent>
-
-              <Button
-                size="medium"
-                sx={{ bgcolor: "custom.orange", color: "black" }}
-                className="addtocartbtn"
-              >
-                view recipe
-              </Button>
             </Card>
           </Grid>
         </Grid>

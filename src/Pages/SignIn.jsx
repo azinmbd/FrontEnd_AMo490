@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import signInBg from "../assets/siginin.jpg";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../redux/features//authSlice";
+import { login, resetAuthStatus } from "../redux/features//authSlice";
 import MuiAlert from "@mui/material/Alert";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -20,9 +20,8 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 const SignIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const status = useSelector((state) => state.auth.status);
-  const [notification, setNotification] = useState(null); // Store the notification state
+  const [notification, setNotification] = useState(null);
 
   useEffect(() => {
     if (status === "Successful") {
@@ -31,9 +30,7 @@ const SignIn = () => {
           Your login was successful!
         </Alert>
       );
-      setTimeout(() => {
-        navigate("/");
-      }, 1000); // Navigate after 1 second
+      navigate("/");
     } else if (status === 401 || status === 404) {
       setNotification(
         <Alert severity="error" sx={{ mt: 4 }}>
@@ -43,19 +40,20 @@ const SignIn = () => {
         </Alert>
       );
       setTimeout(() => {
-        setNotification(null); // Clear the notification after a few seconds
+        setNotification(null);
       }, 5000);
     }
-  }, [status, navigate]);
+
+
+  }, [status, navigate, dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login({ userEmail, userPassword }));
+    dispatch(login({ email, password }));
   };
 
-  const [userEmail, setEmail] = useState("");
-  const [userPassword, setPassword] = useState("");
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <Grid
@@ -100,24 +98,24 @@ const SignIn = () => {
                 margin="normal"
                 required
                 fullWidth
-                id="userEmail"
+                id="email"
                 label="Email Address"
-                name="userEmail"
+                name="email"
                 autoComplete="email"
                 autoFocus
-                value={userEmail}
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                name="userPassword"
+                name="password"
                 label="Password"
                 type="password"
-                id="userPassword"
+                id="password"
                 autoComplete="current-password"
-                value={userPassword}
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
 
