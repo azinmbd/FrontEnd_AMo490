@@ -1,6 +1,5 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
@@ -9,7 +8,6 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import firstpic from "../../assets/firstpic.png";
 import { useNavigate } from "react-router-dom";
-
 
 export default function HFirstSection() {
   let navigate = useNavigate();
@@ -30,8 +28,6 @@ export default function HFirstSection() {
         sx={{ pt: 8 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
       >
-        <CssBaseline />
-
         <Grid
           item
           xs={12}

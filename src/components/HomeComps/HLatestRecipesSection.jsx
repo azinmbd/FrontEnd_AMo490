@@ -14,9 +14,6 @@ export default function () {
     e.preventDefault();
     navigate("/aboutus");
   };
-  // const handleTabChange = (event, newTabIndex) => {
-  //   setTabIndex(newTabIndex);
-  // };
 
   return (
     <section style={{ backgroundColor: "#F8F5E4" }}>

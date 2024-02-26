@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import signInBg from "../assets/siginin.jpg";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login, resetAuthStatus } from "../redux/features//authSlice";
+import { login } from "../redux/features//authSlice";
 import MuiAlert from "@mui/material/Alert";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -43,8 +43,6 @@ const SignIn = () => {
         setNotification(null);
       }, 5000);
     }
-
-
   }, [status, navigate, dispatch]);
 
   const handleSubmit = (e) => {
@@ -52,8 +50,13 @@ const SignIn = () => {
     dispatch(login({ email, password }));
   };
 
+  const handleSignUp = (e) => {
+    navigate("/signup");
+  };
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <Grid
@@ -130,12 +133,12 @@ const SignIn = () => {
 
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  {/* <Link href="#" variant="body2">
                     Forgot password?
-                  </Link>
+                  </Link> */}
                 </Grid>
                 <Grid item>
-                  <Link href="" variant="body2">
+                  <Link href="" variant="body2" onClick={handleSignUp}>
                     Don't have an account? Sign Up
                   </Link>
                 </Grid>

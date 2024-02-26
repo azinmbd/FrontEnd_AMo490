@@ -15,15 +15,18 @@ import { useSelector, useDispatch } from "react-redux";
 const App = () => {
   AOS.init({ once: true });
   const token = useSelector((state) => state.auth.token);
-  const logoutStatus = useSelector((state) => state.userLogout.status);
   const dispatch = useDispatch();
 
+  console.log(token);
   useEffect(() => {}, [dispatch]);
 
   return (
     <div>
-      {token && logoutStatus !== "success" ? <AuthHeader /> : <NoAuthHeader />}
-
+      {token == null ? (
+        <NoAuthHeader />
+      ) : (
+        <AuthHeader />
+      )}
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/signin" element={<SignIn />} />

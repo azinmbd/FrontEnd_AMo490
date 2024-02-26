@@ -8,7 +8,6 @@ import ProgressBar from "react-animated-progress-bar";
 export default function TechSection() {
   return (
     <section className="bgMilk">
-      {" "}
       <Container maxWidth="xl">
         <Grid
           container
@@ -67,7 +66,6 @@ export default function TechSection() {
                 trackBorderColor="grey"
               />
             </Box>
-
             <br />
             <Box width={"100%"}>
               <Typography component="p" variant="p" color="black" gutterBottom>
@@ -138,7 +136,7 @@ export default function TechSection() {
             <br />
             <Box width={"100%"}>
               <Typography component="p" variant="p" color="black" gutterBottom>
-                SASS
+                ExpressJs
               </Typography>
               <ProgressBar
                 width="90%"
@@ -156,7 +154,7 @@ export default function TechSection() {
             <br />
             <Box width={"100%"}>
               <Typography component="p" variant="p" color="black" gutterBottom>
-                Expertise
+                MongoDB
               </Typography>
               <ProgressBar
                 width="90%"

@@ -24,19 +24,25 @@ const authSlice = createSlice({
       state.token = null;
       state.userId = null;
     },
-    resetAuthStatus(state) {
-      state.status = null;
-    },
-    logout(state) {
+    logoutSuccess(state) {
       state.status = null;
       state.user = null;
       state.token = null;
       state.userId = null;
     },
+    logoutFailure(state) {
+      state.status = "logout_failed";
+    },
   },
 });
 
-export const { loginSuccess, loginFailure, logout , resetAuthStatus} = authSlice.actions;
+export const {
+  loginSuccess,
+  loginFailure,
+  logoutSuccess,
+  logoutFailure,
+  resetAuthStatus,
+} = authSlice.actions;
 
 export const login =
   ({ email, password }) =>
@@ -66,5 +72,32 @@ export const login =
       console.error("Error:", error);
     }
   };
+
+export const logout = (refreshToken, userId) => async (dispatch) => {
+  try {
+    const response = await axios.post(
+      "http://127.0.0.1:3000/user/logout",
+      {
+        refreshToken: refreshToken,
+        userId: userId,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log(response);
+    if (response.data.statusCode === 200 && response.data.success) {
+      console.log("loggedout");
+      dispatch(logoutSuccess());
+    } else {
+      dispatch(logoutFailure());
+    }
+  } catch (error) {
+    dispatch(logoutFailure());
+    console.error("Error:", error);
+  }
+};
 
 export default authSlice.reducer;

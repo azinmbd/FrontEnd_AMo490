@@ -5,8 +5,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import PROF from "../../assets/professor.png";
 import title from "../../assets/CRN.svg";
-import AnoutIntro from "../../assets/aboutIntro.png";
 import { useNavigate } from "react-router-dom";
+import Linkdin from "../svg/linkdin";
 
 export default function ProposedSection() {
   let navigate = useNavigate();
@@ -93,7 +93,12 @@ export default function ProposedSection() {
                 with him during our course. He has worked as Unix/Linux System
                 Administrator, Network Engineer/Manager, Software developer,
                 research engineer in video communication and machine learning.
+                If you are interested in getting more information you can check
+                out Mr. Sarif's Linkdin account.
               </Typography>
+              <a>
+                <Linkdin color="#539165" sx={{ mt: 3 }} />
+              </a>
             </Box>
           </Grid>
         </Grid>

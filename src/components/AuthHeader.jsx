@@ -7,7 +7,7 @@ import logo from "../assets/logo.svg";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../redux/features/logoutSlice";
+import { logout } from "../redux/features/authSlice";
 import { useNavigate } from "react-router-dom";
 const AuthHeader = () => {
   const token = useSelector((state) => state.auth.token);

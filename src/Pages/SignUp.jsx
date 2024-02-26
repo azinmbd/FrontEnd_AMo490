@@ -13,12 +13,7 @@ import signUpBg from "../assets/sigup.jpg";
 import { useNavigate } from "react-router-dom";
 import MuiAlert from "@mui/material/Alert";
 import { useDispatch } from "react-redux";
-import {
-  registerUser,
-  registerStart,
-  registerSuccess,
-  registerFailure,
-} from "../redux/features/userRegisterSlice";
+import { registerUser } from "../redux/features/userRegisterSlice";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -35,14 +30,13 @@ const SignUp = () => {
     password: "",
   });
   const [showAlert, setShowAlert] = useState(false);
-
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (
       !formData.first_name ||
       !formData.last_name ||
@@ -52,7 +46,6 @@ const SignUp = () => {
       setShowAlert(true);
       return;
     }
-
     try {
       const response = await axios.post(
         "http://127.0.0.1:3000/user/register",
@@ -63,10 +56,10 @@ const SignUp = () => {
           },
         }
       );
-
       console.log(response);
       if (response.status === 200 || response.status === 201) {
         dispatch(registerUser(formData));
+        setShowSuccessAlert(true);
         setTimeout(() => navigate("/signin"), 600);
       } else {
         setShowAlert(true);
@@ -226,6 +219,11 @@ const SignUp = () => {
             {showAlert && (
               <Alert severity="error" sx={{ mt: 4 }}>
                 There was an error in creating your account. Please try again.
+              </Alert>
+            )}
+            {showSuccessAlert && (
+              <Alert severity="success" sx={{ mt: 4 }}>
+                Registration successful! You can now sign in.
               </Alert>
             )}
           </Box>
