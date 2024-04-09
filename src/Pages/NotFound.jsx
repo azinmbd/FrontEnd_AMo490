@@ -1,11 +1,20 @@
-import React from "react";
-import { Box, Button, Typography } from "@mui/material";
+import React, {  useLayoutEffect, useRef } from "react";
+import {  Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
-
+import { useLocation } from 'react-router-dom';
 export default function NotFound() {
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const scrollRef = useRef(null);
+
+  useLayoutEffect(() => {
+      if (scrollRef.current) {
+          scrollRef.current.scrollTo(0, 0);
+      }
+  }, [location.pathname]);
   return (
     <Grid
       container

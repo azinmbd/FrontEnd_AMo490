@@ -1,26 +1,26 @@
-import React, { useEffect } from "react";
-import Container from "@mui/material/Container";
+import React, {  useLayoutEffect, useRef } from "react";
 import Footer from "../components/Footer";
 import HFirstSection from "../components/HomeComps/HFirstSection";
+import HAISection from "../components/HomeComps/HAISection";
 import HAboutSection from "../components/HomeComps/HAboutSection";
-import HLatestRecipesSection from "../components/HomeComps/HLatestRecipesSection";
-import HRecipesSection from "../components/HomeComps/HRecipesSection";
-
+import HCarosel from "../components/HomeComps/HCarosel";
+import { useLocation } from 'react-router-dom';
 const Home = () => {
-  useEffect(() => {}, []);
+  const location = useLocation();
+  const scrollRef = useRef(null);
+
+  useLayoutEffect(() => {
+      if (scrollRef.current) {
+          scrollRef.current.scrollTo(0, 0);
+      }
+  }, [location.pathname]);
+
   return (
     <React.Fragment>
       <HFirstSection />
-      <Container
-        sx={{ pt: 8, pd: 8 }}
-        maxWidth="xl"
-        data-aos="fade-down"
-        data-aos-duration="2000"
-        data-aos-delay="200"
-      />
-      <HRecipesSection />
+      <HCarosel />
+      <HAISection />
       <HAboutSection />
-      <HLatestRecipesSection />
       <Footer />
     </React.Fragment>
   );

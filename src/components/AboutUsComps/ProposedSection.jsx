@@ -80,7 +80,7 @@ export default function ProposedSection() {
               data-aos-delay="0"
             >
               <Typography gutterBottom variant="h3" component="h2">
-                Professor Bambang Sarif
+                Dr. Bambang Sarif
               </Typography>
               <Typography
                 paragraph
@@ -94,7 +94,7 @@ export default function ProposedSection() {
                 Administrator, Network Engineer/Manager, Software developer,
                 research engineer in video communication and machine learning.
                 If you are interested in getting more information you can check
-                out Mr. Sarif's Linkdin account.
+                out Dr. Sarif's Linkdin account.
               </Typography>
               <a>
                 <Linkdin color="#539165" sx={{ mt: 3 }} />

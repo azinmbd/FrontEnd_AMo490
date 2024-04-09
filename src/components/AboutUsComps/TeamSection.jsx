@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Container from "@mui/material/Container";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";

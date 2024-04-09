@@ -3,63 +3,39 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import askAIImg from "../../assets/askAIImg.png";
-import { Link } from "react-router-dom";
+import aboutus from "../../assets/aboutus.png";
+import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 
-export default function HAboutSection() {
+export default function HAboutSection () {
+  let navigate = useNavigate();
+
+  const handleAbout = (e) => {
+    e.preventDefault();
+    navigate("/aboutus");
+  };
+
   return (
-    <Container maxWidth="xl">
-      <Grid
-        container
-        component="main"
-        sx={{ pt: 8, pb: 8 }}
-        columns={{ xs: 4, sm: 8, md: 12 }}
-      >
+    <section style={{ backgroundColor: "#F8F5E4" }}>
+      <Container maxWidth="xl">
         <Grid
-          item
-          xs={12}
-          sm={12}
-          md={6}
-          sx={{ display: "flex", alignItems: "center", paddingTop: "30px" }}
+          container
+          component="main"
+          sx={{ pt: 8 }}
+          columns={{ xs: 4, sm: 8, md: 12 }}
         >
-          <img
-            src={askAIImg}
-            width="90%"
-            alt=""
-            data-aos="fade-up"
-            data-aos-duration="1500"
-            data-aos-delay="200"
-          />
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={6}
-          elevation={6}
-          alignItems="center"
-          justifyContent="center"
-          display={"flex"}
-          boxShadow={"none"}
-        >
-          <Box
-            sx={{
-              my: 8,
-              mx: 4,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-            data-aos="fade-right"
-            data-aos-duration="2000"
-            data-aos-delay="0"
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            md={6}
+            elevation={6}
+            alignItems="center"
+            justifyContent="center"
+            display={"flex"}
+            boxShadow={"none"}
           >
-            <Container maxWidth="md">
-
-
-
-              <Box
+            <Box
               sx={{
                 my: 8,
                 mx: 4,
@@ -78,7 +54,7 @@ export default function HAboutSection() {
                   data-aos-duration="2000"
                   data-aos-delay={600}
                 >
-                  Ask AI
+                  About Us
                 </Typography>
                 <Typography
                   paragraph
@@ -86,27 +62,49 @@ export default function HAboutSection() {
                   data-aos-duration="2000"
                   data-aos-delay={600}
                 >
-                  You can utilize the advanced capabilities of an AI-powered system to explore a diverse range of mouth-watering meal ideas that you can cook using your available ingredients. With its intelligent algorithms and predictive modeling, the AI system can suggest creative and innovative recipes that will tantalize your taste buds and make your cooking experience more enjoyable.
+                  SavoRAY Recipes, your go-to destination for culinary
+                  inspiration and convenience. Discover a world of flavors,
+                  connect with chefs, and share your passion for cooking
+                  effortlessly. With our intuitive interface, explore, create,
+                  and savor delightful recipes tailored to your tastes!
                 </Typography>
 
-                <Link to="/askai">
-                  <Button
-                    variant="contained"
-                    size="large"
-                    className="mainbtn"
-                    data-aos="fade-right"
-                    data-aos-duration="2000"
-                    data-aos-delay="1000"
-                  >
-                    Try it out!
-                  </Button>
-                </Link>
+                <Button
+                  variant="contained"
+                  size="large"
+                  className="secondbtn"
+                  data-aos="fade-right"
+                  data-aos-duration="2000"
+                  data-aos-delay="1300"
+                  onClick={handleAbout}
+                >
+                  Read More
+                </Button>
               </Container>
             </Box>
-            </Container>
-          </Box>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            md={6}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              paddingBottom: "40px",
+            }}
+          >
+            <img
+              src={aboutus}
+              width="90%"
+              alt=""
+              data-aos="fade-down"
+              data-aos-duration="2000"
+              data-aos-delay="200"
+            />
+          </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </section>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useLayoutEffect, useRef} from "react";
 import axios from "axios";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -14,13 +14,15 @@ import { useNavigate } from "react-router-dom";
 import MuiAlert from "@mui/material/Alert";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../redux/features/userRegisterSlice";
-
+import { useLocation } from 'react-router-dom';
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 const SignUp = () => {
   const formRef = React.useRef();
+  const location = useLocation();
+  const scrollRef = useRef(null);
   let navigate = useNavigate();
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
@@ -34,7 +36,11 @@ const SignUp = () => {
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
-
+  useLayoutEffect(() => {
+    if (scrollRef.current) {
+        scrollRef.current.scrollTo(0, 0);
+    }
+}, [location.pathname]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (

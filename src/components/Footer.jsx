@@ -53,8 +53,9 @@ export const Footer = () => {
                 <br />
               </Typography>
               <Typography color="black" variant="p">
-                SavoRAy Recipes lorem ipsum SavoRAy Recipes lorem ipsumSavoRAy
-                Recipes lorem ipsumSavoRAy Recipes lorem ipsum
+                SavoRAy Recipes a platform that provides you access to manay
+                recipes and access to AI to help you with the recipes you are
+                looking for.
                 <br />
               </Typography>
               <Typography

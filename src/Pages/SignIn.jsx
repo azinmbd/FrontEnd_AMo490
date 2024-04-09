@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/features//authSlice";
 import MuiAlert from "@mui/material/Alert";
-
+import { useLocation } from 'react-router-dom';
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -22,7 +22,10 @@ const SignIn = () => {
   const navigate = useNavigate();
   const status = useSelector((state) => state.auth.status);
   const [notification, setNotification] = useState(null);
+  const location = useLocation();
+  const scrollRef = useRef(null);
 
+  console.log(status)
   useEffect(() => {
     if (status === "Successful") {
       setNotification(
@@ -30,24 +33,42 @@ const SignIn = () => {
           Your login was successful!
         </Alert>
       );
-      navigate("/");
-    } else if (status === 401 || status === 404) {
+      setNotification(true);
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
+    }
+  }, [status, navigate, dispatch]);
+
+  useLayoutEffect(() => {
+    if (scrollRef.current) {
+        scrollRef.current.scrollTo(0, 0);
+    }
+}, [location.pathname]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(login({ email, password }));
+    if (status === "failed") {
       setNotification(
         <Alert severity="error" sx={{ mt: 4 }}>
-          {status === 401
+          {status === "failed"
             ? "Email or password are wrong. Try Again!"
             : "User not found. Please sign up."}
         </Alert>
       );
+      
       setTimeout(() => {
         setNotification(null);
-      }, 5000);
+      }, 3000);
+    } 
+    if (status === "Successful") {
+      setNotification(
+        <Alert severity="success" sx={{ mt: 4 }}>
+          Your login was successful!
+        </Alert>
+      );
+      setNotification(true);
     }
-  }, [status, navigate, dispatch]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(login({ email, password }));
   };
 
   const handleSignUp = (e) => {

@@ -1,52 +1,75 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import recipe1 from "../../assets/Recipe1.jpg";
+import { getRecipes } from "../../redux/features/getRecipesSlice";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getRecipe } from "../../redux/features/getRecipeInfoSlice";
+
 const FeaturedRecipe = () => {
+  const characterLimit = 180;
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const dispatch = useDispatch();
+  let navigate = useNavigate();
+  const recipes = useSelector((state) => state.allRecipes.recipes.recipes);
+  const [randomIndex, setRandomIndex] = useState(0);
+
+  useEffect(() => {
+    dispatch(getRecipes());
+  }, [dispatch]);
+
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * recipes.length);
+    setRandomIndex(randomIndex);
+  }, [recipes]);
 
   const handleMouseMove = (event) => {
     setMousePosition({ x: event.clientX, y: event.clientY });
   };
-  // useEffect(() => {
-  // }, [dispatch]);
+
+  const handleRecipeInfo = (e, id) => {
+    e.preventDefault();
+    navigate(`/recipes/${id}`);
+    dispatch(getRecipe(id));
+  };
+
+  const truncateText = (text) => {
+    if (text.length <= characterLimit) {
+      return text;
+    }
+    return text.slice(0, characterLimit) + "...";
+  };
 
   return (
     <section
       className="featuredRecipe parallax-container"
       onMouseMove={handleMouseMove}
     >
-      <div
-        className="parallax-layer layer1"
-        style={{
-          transform: `translate(-${mousePosition.x / 50}px, -${
-            mousePosition.y / 50
-          }px)`,
-        }}
-      ></div>
-      <div
-        className="parallax-layer layer2"
-        style={{
-          transform: `translate(-${mousePosition.x / 30}px, -${
-            mousePosition.y / 30
-          }px)`,
-        }}
-      ></div>
-      <Container maxWidth="xl">
+      <Typography
+        gutterBottom
+        variant="h3"
+        align="center"
+        marginBottom={3}
+        data-aos="fade-down"
+        data-aos-duration="2000"
+        data-aos-delay={1240}
+        sx={{ pt: 3 }}
+      >
+        Featured Recipe
+        <span className="line"></span>
+      </Typography>{" "}
+      <Container maxWidth="xl" sx={{position:"relative", zIndex:4}}>
         <Grid
           container
           component="main"
-          sx={{ pt: 8 }}
+          sx={{ pt: 8, pb: 5 }}
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
-          <CssBaseline />
-
           <Grid
             item
             xs={12}
@@ -79,7 +102,10 @@ const FeaturedRecipe = () => {
                   data-aos-duration="2000"
                   data-aos-delay={1240}
                 >
-                  Recipe Title
+                  {recipes[randomIndex]?.title}
+                </Typography>
+                <Typography gutterBottom variant="span" component="span">
+                  {recipes[randomIndex]?.time}
                 </Typography>
                 <Typography
                   paragraph
@@ -87,11 +113,9 @@ const FeaturedRecipe = () => {
                   data-aos-duration="2000"
                   data-aos-delay={600}
                 >
-                  SavoRAy Recipes is a user-friendly platrorm that provides an
-                  extensive assortment of recipes and instructional resources.
-                  It assists users in finding food recipes that match the
-                  ingredients available in their refrigerators, while also
-                  facilitating the sharing of favorite recipes with others
+                  {recipes[randomIndex]?.instructions?.length > 0
+                    ? truncateText(recipes[randomIndex].instructions[0])
+                    : ""}
                 </Typography>
                 <Stack sx={{ pt: 4 }} direction="row" spacing={2}>
                   <Button
@@ -101,6 +125,7 @@ const FeaturedRecipe = () => {
                     data-aos="fade-right"
                     data-aos-duration="2000"
                     data-aos-delay="1300"
+                    onClick={(e) => handleRecipeInfo(e, recipes[randomIndex]?._id)}
                   >
                     View Recipe
                   </Button>
@@ -122,7 +147,7 @@ const FeaturedRecipe = () => {
           >
             <img
               className="featuredRecipeImg"
-              src={recipe1}
+              src={recipes[randomIndex]?.image}
               width="90%"
               alt=""
               data-aos="fade-down"
@@ -132,6 +157,22 @@ const FeaturedRecipe = () => {
           </Grid>
         </Grid>
       </Container>
+      <div
+        className="parallax-layer layer1"
+        style={{
+          transform: `translate(-${mousePosition.x / 50}px, -${
+            mousePosition.y / 50
+          }px)`,
+        }}
+      ></div>
+      <div
+        className="parallax-layer layer2"
+        style={{
+          transform: `translate(-${mousePosition.x / 30}px, -${
+            mousePosition.y / 30
+          }px)`,
+        }}
+      ></div>
     </section>
   );
 };

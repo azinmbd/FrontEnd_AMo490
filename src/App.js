@@ -10,6 +10,9 @@ import SignUp from "./Pages/SignUp";
 import Recipes from "./Pages/Recipes";
 import NotFound from "./Pages/NotFound";
 import AboutUs from "./Pages/AboutUs";
+import RecipeInfo from "./Pages/RecipeInfo";
+import AskAI from "./Pages/AskAI";
+import Profile from "./Pages/Profile";
 import { useSelector, useDispatch } from "react-redux";
 
 const App = () => {
@@ -22,17 +25,19 @@ const App = () => {
 
   return (
     <div>
-      {token == null ? (
-        <NoAuthHeader />
-      ) : (
-        <AuthHeader />
-      )}
+      <NoAuthHeader />
+      {token ? <AuthHeader /> : <NoAuthHeader />}
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/recipes" element={<Recipes />} />
+        <Route path="recipes">
+          <Route path=":coffeeId" element={<RecipeInfo />} />
+        </Route>
         <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/askai" element={<AskAI />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

@@ -7,7 +7,7 @@ const initialState = {
 };
 
 const getRecipesSlice = createSlice({
-  name: "getRecipes",
+  name: "recipes",
   initialState,
   reducers: {
     getRecipesSuccess(state, action) {
@@ -23,14 +23,14 @@ const getRecipesSlice = createSlice({
   },
 });
 
-export const { getRecipesSuccess, getRecipesFailure, resetGetRecipesStatus } = getRecipesSlice.actions;
+export const { getRecipesSuccess, getRecipesFailure, resetGetRecipesStatus } =
+ getRecipesSlice.actions;
 
 export const getRecipes = () => async (dispatch) => {
   try {
     const response = await axios.get(
       "http://127.0.0.1:3000/recipe/list"
     );
-    console.log(response);
     if (response.status === 200) {
       dispatch(getRecipesSuccess(response.data));
     } else {

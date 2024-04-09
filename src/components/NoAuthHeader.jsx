@@ -4,8 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.svg";
-import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 // import { deleteToken } from "../redux/features/authSlice";
 
 const NoAuthHeader = () => {

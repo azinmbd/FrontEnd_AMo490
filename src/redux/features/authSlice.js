@@ -47,7 +47,6 @@ export const {
 export const login =
   ({ email, password }) =>
   async (dispatch) => {
-    console.log(email, password);
     try {
       const response = await axios.post(
         "http://127.0.0.1:3000/user/login",
@@ -55,13 +54,8 @@ export const login =
           email,
           password,
         },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+        
       );
-      console.log(response);
       if (response.data.statusCode === 200 && response.data.success) {
         dispatch(loginSuccess(response.data));
       } else {
@@ -73,23 +67,18 @@ export const login =
     }
   };
 
-export const logout = (refreshToken, userId) => async (dispatch) => {
+export const logout = ({refreshToken, userId}) => async (dispatch) => {
   try {
     const response = await axios.post(
       "http://127.0.0.1:3000/user/logout",
       {
-        refreshToken: refreshToken,
-        userId: userId,
+        refreshToken,
+        userId,
       },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
+
     );
-    console.log(response);
-    if (response.data.statusCode === 200 && response.data.success) {
-      console.log("loggedout");
+    console.log(  response);
+    if (response.data.statusCode === 200) {
       dispatch(logoutSuccess());
     } else {
       dispatch(logoutFailure());
